@@ -2,7 +2,7 @@ name: Deploy Project
 
 on:
   push:
-    branshes:
+    branches:
       - main
 
 jobs:
