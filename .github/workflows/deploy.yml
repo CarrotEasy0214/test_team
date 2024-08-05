@@ -62,10 +62,10 @@ jobs:
 
       - name: check mysql
         run: |
-          ssh ${{ secrets.EC2_USER }}@{{ secrets.EC2_HOST }} '
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
           sudo service mysql status'
 
       - name: test mysql
         run: |
-          ssh ${{ secrets.EC2_USER }}@{{ secrets.EC2_HOST }} '
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
           mysql -u ${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD }} -e "SHOW DATABASES;"'
