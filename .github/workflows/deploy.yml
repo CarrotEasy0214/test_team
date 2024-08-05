@@ -175,16 +175,15 @@ jobs:
             mkdir /var/www/backend'
           rsync -avz -e "ssh" ./server/build/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/backend
           rsync -avz -e "ssh" ./server/package.json ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/backend/package.json
-                    ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
           export NVM_DIR="$HOME/.nvm"
-          if [ -s "$NVM_DIR/nvm.sh" ]; then
-           . "$NVM_DIR/nvm.sh"
-          else
-            echo "nvm.sh not found"
-            exit 1
-          fi
+          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" || {
+          echo "nvm.sh not found"
+          exit 1
+          }
 
           nvm -v
           nvm use --lts
-          cd /var/www/backend
-          npm i --production'
+          cd  /var/www/backend
+          npm i --production
+          echo "PORT=3080" > .env'
